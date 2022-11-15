@@ -1,12 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="style.css">
+        <title>Tetris</title>
+    </head>
+    <body>
+
+        <!-- container Text -->
+        <div>Tetris<a target="_blank" href="./"></a></div><br>
+        <canvas id="tetris" width="200" height="400"></canvas>
+
+        <!-- Container score game -->
+        <div>
+            Score : <div id="score">0</div>
+        </div>
+
+        <!-- Link file JavaScript -->
+        <script src="./figuras.js"></script>
+        <script src="./tetris.js"></script>
+    </body>
 </html>

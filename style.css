@@ -1,12 +1,15 @@
+/* Style in score container */
 #score{
     display: inline-block;
 }
+/* Font for container div in the frontend and align text */
 div{
     font-size: 25px;
     font-weight: bold;
     font-family: monospace;
     text-align: center;
 }
+/* Style in canvas container with display block and margin */
 canvas{
     display: block;
     margin:0 auto;

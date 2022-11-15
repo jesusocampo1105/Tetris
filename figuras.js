@@ -1,3 +1,5 @@
+
+/* Create shape I in array */
 const I = [
 	[
 		[0, 0, 0, 0],
@@ -25,6 +27,7 @@ const I = [
 	]
 ];
 
+/* Create shape J in array */
 const J = [
 	[
 		[1, 0, 0],
@@ -48,6 +51,7 @@ const J = [
 	]
 ];
 
+/* Create shape L in array */
 const L = [
 	[
 		[0, 0, 1],
@@ -71,6 +75,7 @@ const L = [
 	]
 ];
 
+/* Create shape O in array */
 const O = [
 	[
 		[0, 0, 0, 0],
@@ -80,6 +85,7 @@ const O = [
 	]
 ];
 
+/* Create shape S in array */
 const S = [
 	[
 		[0, 1, 1],
@@ -103,6 +109,7 @@ const S = [
 	]
 ];
 
+/* Create shape T in array */
 const T = [
 	[
 		[0, 1, 0],
@@ -126,6 +133,7 @@ const T = [
 	]
 ];
 
+/* Create shape Z in array */
 const Z = [
 	[
 		[1, 1, 0],

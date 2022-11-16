@@ -13,7 +13,7 @@ const vacio = "white";
 function drawCuadrado (x,y,color){
     fig.fillStyle = color;
     fig.fillRect(x*cuadrado,y*cuadrado,cuadrado,cuadrado);
-    
+
     fig.strokeStyle = "black";
     fig.strokeRect(x*cuadrado,y*cuadrado,cuadrado,cuadrado);
 }
@@ -40,3 +40,14 @@ function drawTablero(){
     }
 }
 drawTablero();
+
+// the pieces and their colors
+const pieces = [
+    [Z,"red"],
+    [S,"green"],
+    [T,"yellow"],
+    [O,"blue"],
+    [L,"purple"],
+    [I,"cyan"],
+    [J,"orange"]
+];

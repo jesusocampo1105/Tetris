@@ -1,7 +1,7 @@
 //we connect with the html id
 const canvas = document.getElementById("tetris");
 const fig = canvas.getContext("2d");
-const score = document.getElementById("score");
+const puntaje = document.getElementById("score");
 
 // color of an empty square and the size of the canvas
 const fila = 20;
@@ -149,3 +149,118 @@ Piece.prototype.rotate = function(){
         this.draw();
     }
 }
+
+let score = 0;
+
+Piece.prototype.lock = function(){
+    for( r = 0; r < this.activeTetromino.length; r++){
+        for(c = 0; c < this.activeTetromino.length; c++){
+            // we skip the vacant squares
+            if( !this.activeTetromino[r][c]){
+                continue;
+            }
+            // pieces to lock on top = game over
+            if(this.y + r < 0){
+                alert("Game Over");
+                // stop request animation frame
+                gameOver = true;
+                break;
+            }
+            // we lock the piece
+            board[this.y+r][this.x+c] = this.color;
+        }
+    }
+    // remove full rows
+    for(r = 0; r < fila; r++){
+        let isRowFull = true;
+        for( c = 0; c < columna; c++){
+            isRowFull = isRowFull && (board[r][c] != vacio);
+        }
+        if(isRowFull){
+            // if the row is full
+            // we move down all the rows above it
+            for( y = r; y > 1; y--){
+                for( c = 0; c < columna; c++){
+                    board[y][c] = board[y-1][c];
+                }
+            }
+            // the top row board has no row above it
+            for( c = 0; c < columna; c++){
+                board[0][c] = vacio;
+            }
+            // increment the score
+            score += 10;
+        }
+    }
+    // update the board
+    drawTablero();
+    
+    // update the score
+    puntaje.innerHTML = score;
+}
+
+// collision
+Piece.prototype.collision = function(x,y,piece){
+    for( r = 0; r < piece.length; r++){
+        for(c = 0; c < piece.length; c++){
+            // if the square is empty, we skip it
+            if(!piece[r][c]){
+                continue;
+            }
+            // coordinates of the piece after movement
+            let newX = this.x + c + x;
+            let newY = this.y + r + y;
+            
+            // conditions
+            if(newX < 0 || newX >= columna || newY >= fila){
+                return true;
+            }
+            // skip newY < 0; board[-1] will crush our game
+            if(newY < 0){
+                continue;
+            }
+            // check if there is a locked piece alrady in place
+            if( board[newY][newX] != vacio){
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+// CONTROL the piece
+
+document.addEventListener("keydown",CONTROL);
+
+function CONTROL(event){
+    if(event.keyCode == 37){
+        p.moveLeft();
+        dropStart = Date.now();
+    }else if(event.keyCode == 38){
+        p.rotate();
+        dropStart = Date.now();
+    }else if(event.keyCode == 39){
+        p.moveRight();
+        dropStart = Date.now();
+    }else if(event.keyCode == 40){
+        p.moveDown();
+    }
+}
+
+// drop the piece every 1sec
+
+let dropStart = Date.now();
+let gameOver = false;
+function drop(){
+    let now = Date.now();
+    let delta = now - dropStart;
+    if(delta > 1000){
+        p.moveDown();
+        dropStart = Date.now();
+    }
+    if( !gameOver){
+        requestAnimationFrame(drop);
+    }
+}
+
+drop();

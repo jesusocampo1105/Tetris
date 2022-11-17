@@ -52,8 +52,49 @@ const pieces = [
     [J,"orange"]
 ];
 
-// move Down the piece
+// generate random pieces
+function randomPiece(){
+    let r = randomN = Math.floor(Math.random() * pieces.length) // 0 -> 6
+    return new Piece( pieces[r][0],pieces[r][1]);
+}
+let p = randomPiece();
 
+// The Object Piece
+function Piece(tetromino,color){
+    this.tetromino = tetromino;
+    this.color = color;
+    
+    this.tetrominoN = 0; // we start from the first pattern
+    this.activeTetromino = this.tetromino[this.tetrominoN];
+    
+    // we need to control the pieces
+    this.x = 3;
+    this.y = -2;
+}
+
+// fill function
+Piece.prototype.fill = function(color){
+    for( r = 0; r < this.activeTetromino.length; r++){
+        for(c = 0; c < this.activeTetromino.length; c++){
+            // we draw only occupied squares
+            if( this.activeTetromino[r][c]){
+                drawCuadrado(this.x + c,this.y + r, color);
+            }
+        }
+    }
+}
+
+// draw a piece to the board
+Piece.prototype.draw = function(){
+    this.fill(this.color);
+}
+
+// undraw a piece
+Piece.prototype.unDraw = function(){
+    this.fill(vacio);
+}
+
+// move Down the piece
 Piece.prototype.moveDown = function(){
     if(!this.collision(0,1,this.activeTetromino)){
         this.unDraw();
@@ -91,7 +132,7 @@ Piece.prototype.rotate = function(){
     let kick = 0;
     
     if(this.collision(0,0,nextPattern)){
-        if(this.x > COL/2){
+        if(this.x > columna/2){
             // it's the right wall
             kick = -1; // we need to move the piece to the left
         }else{

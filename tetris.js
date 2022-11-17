@@ -2,6 +2,12 @@
 const canvas = document.getElementById("tetris");
 const fig = canvas.getContext("2d");
 const puntaje = document.getElementById("score");
+// button responsive (mobile)
+const left = document.querySelector("#btnleft");
+const up = document.querySelector("#btnup");
+const right = document.querySelector("#btnright");
+const down = document.querySelector("#btndown");
+
 
 // color of an empty square and the size of the canvas
 const fila = 20;
@@ -246,6 +252,31 @@ function CONTROL(event){
         p.moveDown();
     }
 }
+
+// button responsive (mobile)
+left.addEventListener("click", buttonleft);
+up.addEventListener("click", buttonup);
+right.addEventListener("click", buttonright);
+down.addEventListener("click", buttondown);
+
+function buttonleft(event){
+    p.moveLeft();
+    dropStart = Date.now();
+};
+
+function buttonup(event){
+    p.rotate();
+        dropStart = Date.now();
+};
+
+function buttonright(event){
+    p.moveRight();
+        dropStart = Date.now();
+};
+
+function buttondown(event){
+    p.moveDown();
+};
 
 // drop the piece every 1sec
 
